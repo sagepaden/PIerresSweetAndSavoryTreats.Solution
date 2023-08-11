@@ -1,0 +1,65 @@
+div#footer {
+	position:fixed;
+	bottom:0px;
+	left:0px;
+	width:100%;
+	color:#CCC;
+	background:#333;
+	padding: 4px;
+	padding-left: 8px;
+}
+
+body {
+	background: rgb(136,168,160);
+	background: linear-gradient(90deg, rgba(136,168,160,1) 5%, rgba(166,207,184,1) 50%, rgba(136,168,160,1) 100%);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: auto;
+	background-attachment: fixed;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	padding-bottom: 5%;
+}
+
+img{
+	display: block;
+	padding: 15px;
+	margin-left: auto;
+	margin-right: auto;
+	height: 10%;
+}
+
+div#navbar {
+	margin-bottom: 20px;
+	border-bottom: solid;
+	border-width: 1px;
+}
+
+.link a:hover {
+	color: #fc03cef0;
+	color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.card{
+	opacity: 0.85;
+	padding: 10px;
+	background-color: #E3E3E3;
+	width: 75%;
+	line-height: 200%;
+}
+
+input#deleteDetails {
+	background-color: #6d7ff9f0;
+	color: white;
+	border: none;
+	padding: 1px 4px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 12px;
+	margin: 4px 2px;
+	cursor: pointer;
+}
