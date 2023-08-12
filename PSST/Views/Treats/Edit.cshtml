@@ -1,0 +1,31 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PSST.Models.Treat
+
+<h2>Edit</h2>
+<hr>
+
+<h4>Edit this Treat: @Html.DisplayFor(model => model.TreatName)</h4>
+
+<p>@Html.ValidationMessageFor(model => model.TreatName, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+
+<p>@Html.ValidationMessageFor(model => model.TreatDescription, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.TreatId)
+
+  @Html.LabelFor(model => model.TreatName)
+  @Html.EditorFor(model => model.TreatName)
+  <br>
+
+  @Html.LabelFor(model => model.TreatDescription)
+  @Html.EditorFor(model => model.TreatDescription)
+
+  <input type="submit" value="Save"/>
+}
+<hr><br>
+<p>@Html.ActionLink("Back to list", "Index", "Treats", null, new { @class = "btn btn-light" })</p>

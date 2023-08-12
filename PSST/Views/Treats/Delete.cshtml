@@ -1,0 +1,16 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PSST.Models.Treat
+
+<h2>WHY?</h2>
+<hr>
+
+@Html.DisplayNameFor(model => model.TreatName): @Html.DisplayFor(model => model.TreatName)
+@using (Html.BeginForm())
+{
+  <input type="submit" value="Delete" id="deleteDetails"/>
+}
+<hr><br>
+@Html.ActionLink("Back to List", "Index", "Treats", null, new { @class = "btn btn-light" })

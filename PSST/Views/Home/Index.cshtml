@@ -1,0 +1,101 @@
+@{
+  Layout = "_Layout";
+}
+
+@using PSST.Models;
+
+<h1 class="title">
+  Welcome to an incredibly tasty nightmare!
+</h1>
+<hr>
+
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="6000">
+      <img src="~/img/treat1.jpg" class="d-block w-50" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+      </div>
+    </div>
+    <div class="carousel-item" data-bs-interval="6000">
+      <img src="~/img/treat2.jpg" class="d-block w-50" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+      </div>
+    </div>
+    <div class="carousel-item" data-bs-interval="6000">
+      <img src="~/img/treat3.jpg" class="d-block w-50" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+      </div>
+    </div>
+    <div class="carousel-item" data-bs-interval="6000">
+      <img src="~/img/treat4.jpg" class="d-block w-50" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<hr><br>
+
+<div class="row align-items-start">
+  <div class="col">
+    <h4>Treats</h4>
+    @if (Model["treats"].Length == 0)
+    {
+      <p>PLEASE FEED ME TREAT DATA!</p>
+    }
+    <ul>
+      @foreach (Treat treat in Model["treats"])
+      {
+      <li>@Html.ActionLink(@treat.TreatName, "Details", "Treats", new { id = @treat.TreatId})</li>
+      }
+    </ul>
+  </div>
+
+  <div class="col">
+    @if (User.Identity.IsAuthenticated)
+    {
+      <h4>Flavors for @User.Identity.Name</h4>
+      @if (Model["flavors"].Length == 0)
+      {
+        <p>INPUT FLAVORS RAPIDLY!</p>
+      }
+      <ul>
+        @foreach (Flavor flavor in Model["flavors"])
+        {
+          <li>@Html.ActionLink(flavor.FlavorName, "Details", "Flavors", new { id = @flavor.FlavorId})</li>
+        }
+      </ul>
+    }
+    else
+    {
+      <h4>Flavors</h4>
+      <p>@Html.ActionLink("log in", "LogIn", "Account") INTRUDERS MAY NOT SEE FLAVORS</p>
+    }
+  </div>
+</div>
+<br>
+<div class="row align-items start">
+  <div class="col">
+    <p>@Html.ActionLink("Manage treats", "Index", "Treats", null, new { @class = "btn btn-light" })</p>
+  </div>
+  <div class="col">
+    <p>@Html.ActionLink("Manage flavors", "Index", "Flavors", null, new { @class = "btn btn-light" })</p>
+  </div>
+</div>
+
+<hr><br>
+
+<p>@Html.ActionLink("Manage Account", "Index", "Account", null, new { @class = "btn btn-secondary" })</p>

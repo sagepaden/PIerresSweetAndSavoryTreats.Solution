@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PSST.Models.Flavor;
+
+<h2>Add a flavor</h2>
+<hr>
+
+<p>@Html.ValidationMessageFor(model => model.FlavorName, "", new { @class = "text-danger", @style = "font-weight: 600" })</p>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.FlavorName, "Flavor:")<br>
+  @Html.TextBoxFor(model => model.FlavorName, new { placeholder = "something funny and not normal hahaha get it? its not normal", style="font-style:italic"})<br>
+  <br>
+  <input type="submit" value="Add new flavor" class="btn btn-light"/>
+}
+<hr><br>
+<p>@Html.ActionLink("Show all flavors", "Index", "Flavors", null, new { @class = "btn btn-light" })</p>
+<p>@Html.ActionLink("Create a new treat", "Create", "Treats", null, new { @class = "btn btn-light" })</p>

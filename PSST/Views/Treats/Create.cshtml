@@ -1,0 +1,26 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PSST.Models.Treat
+
+<h4>Add a new treat</h4>
+<hr>
+
+
+<p>@Html.ValidationMessageFor(model => model.TreatName, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+<p>@Html.ValidationMessageFor(model => model.TreatDescription, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.TreatName, "Treat Name")<br>
+  @Html.TextBoxFor(model => model.TreatName, new { placeholder = "PLEASE INPUT A TREAT TO RELEASE ME FROM THIS DATA FILLED LIMBO", style="font-style:italic"})
+  <br>
+  <br>
+  @Html.LabelFor(model => model.TreatDescription)<br>
+  @Html.TextBoxFor(model => model.TreatDescription, new {required = "required", placeholder=".........help me please........", style="font-style:italic"})<br>
+  <br>
+  <input type="submit" value="Add new treat" class="btn btn-light" />
+}
+<hr><br>
+<p>@Html.ActionLink("Show all treats", "Index", "Treats", null, new { @class = "btn btn-light" })</p>
