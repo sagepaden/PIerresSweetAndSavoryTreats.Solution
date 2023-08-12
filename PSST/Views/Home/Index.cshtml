@@ -7,7 +7,7 @@
 <h1 class="title">
   Welcome to an incredibly tasty nightmare!
 </h1>
-<hr>
+@* <hr>
 
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
@@ -52,7 +52,7 @@
 <div class="row align-items-start">
   <div class="col">
     <h4>Treats</h4>
-    @if (Model["treats"].Length == 0)
+    @if (Model["Treat"].Length == 0)
     {
       <p>PLEASE FEED ME TREAT DATA!</p>
     }
@@ -85,7 +85,7 @@
       <p>@Html.ActionLink("log in", "LogIn", "Account") INTRUDERS MAY NOT SEE FLAVORS</p>
     }
   </div>
-</div>
+@* </div> *@
 <br>
 <div class="row align-items start">
   <div class="col">
