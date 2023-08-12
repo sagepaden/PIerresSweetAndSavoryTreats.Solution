@@ -2,17 +2,19 @@
   Layout = "_Layout";
 }
 
-@model PSST.Models.Treat
+@using PSST.Models
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model Treat
 
 <h2>Add Flavor</h2>
 <hr>
 
 @using (Html.BeginForm())
 {
-  @Html.HiddenFor(model => model.TreatId)
+  @Html.Hidden("TreatId", (int)ViewBag.TreatId)
 
   @Html.Label("Flavor: ")
-  @Html.DropDownList("FlavorId")
+  @Html.DropDownListFor(model => model.FlavorId, (SelectList)ViewBag.FlavorName)
   <br />
   <br />
   <input type="submit" value="Add Flavor" />
