@@ -9,7 +9,7 @@ namespace PSST.Models
 
         [Required(ErrorMessage = "The Flavor must be named!")]
         public string FlavorName { get; set; }
-        public List<TreatFlavor> JoinEntities { get; }
+        public List<TreatFlavor> JoinEntities { get; set; }
         public ApplicationUser User { get; set; }
     }
 }

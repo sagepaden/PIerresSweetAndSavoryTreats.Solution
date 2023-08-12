@@ -1,10 +1,8 @@
 @{
   Layout = "_Layout";
 }
-
-@model PSST.Models.Treat;
 @using PSST.Models;
-@using System.Collections.Generic;
+@model PSST.Models.Treat;
 
 <h2>Treat Details</h2>
 <hr />
@@ -12,11 +10,11 @@
   <h4 class="card-header">Treat Name: <em>@Html.DisplayFor(model => model.TreatName)</em></h4>
   <div class="card-body">
 
-    <h6>@Html.DisplayNameFor(model => model.TreatDescription): <em>@Html.DisplayFor(model => model.TreatDescription)</em></h6>
+    <h6>Description: <em>@Html.DisplayFor(model => model.TreatDescription)</em></h6>
   </div>
   @if(@Model.JoinEntities.Count == 0)
   {
-    <p>This treat does not have any flavors listed yet!</p>
+    <p>PLEASE ADD FLAVORS!!!</p>
   }
   else
   {

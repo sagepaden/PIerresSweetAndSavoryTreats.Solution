@@ -95,31 +95,25 @@ namespace PSST.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<ActionResult> AddFlavor(int id)
+        public ActionResult AddMachine (int id)
         {
-            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
-            List<Flavor> userFlavors = _db.Flavors
-                                .Where(PSST => PSST.User.Id == currentUser.Id)
-                                .ToList();
-            Treat thisTreat = _db.Treats
-                                .FirstOrDefault(PSST => PSST.TreatId == id);
-            ViewBag.FlavorId = new SelectList(userFlavors, "FlavorId", "Name");
+            Treat thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
+            ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "FlavorName");
             return View(thisTreat);
         }
 
         [HttpPost]
-        public ActionResult AddFlavor(Treat treat, int FlavorId)
+        public ActionResult AddMachine (Treat treat, int flavorId)
         {
             #nullable enable
-            TreatFlavor? joinEntity = _db.TreatFlavors.FirstOrDefault(join => (join.TreatId == treat.TreatId && join.FlavorId == FlavorId));
+                TreatFlavor? joinEntity = _db.TreatFlavors.FirstOrDefault(join => (join.FlavorId == flavorId && join.TreatId == treat.TreatId));
             #nullable disable
-            if (joinEntity == null && FlavorId != 0)
-            {
-                _db.TreatFlavors.Add(new TreatFlavor() { FlavorId = FlavorId, TreatId = treat.TreatId });
-                _db.SaveChanges();
-            }
-            return RedirectToAction("Details", new { id = treat.TreatId });
+                if (joinEntity == null && flavorId != 0)
+                {
+                    _db.TreatFlavors.Add(new TreatFlavor() { FlavorId = flavorId, TreatId = treat.TreatId});
+                    _db.SaveChanges();
+                }
+                return RedirectToAction("Details", new { id = treat.TreatId });
         }
 
         [HttpPost]

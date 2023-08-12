@@ -12,7 +12,8 @@ namespace PSST.Models
 
         [Required(ErrorMessage = "The Treat must have a description!")]
         public string TreatDescription { get; set; }
-        public List<TreatFlavor> JoinEntities { get; }
+        public int FlavorId { get; set; }
+        public List<TreatFlavor> JoinEntities { get; set;}
         public ApplicationUser User { get; set; }
     }
 }
