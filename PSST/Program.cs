@@ -15,7 +15,7 @@ namespace PSST
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddDbContext<PSSTContext>(
-                            dbContextOptions => dbContextOptions ContextOptions
+                            dbContextOptions => dbContextOptions
                             .UseMySql(
                                 builder.Configuration
                                 ["ConnectionStrings:DefaultConnection"],
@@ -28,15 +28,15 @@ namespace PSST
                             .AddEntityFrameworkStores<PSSTContext>()
                             .AddDefaultTokenProviders();
 
-            builder.Services.Configure<IdentityOptions>(options =>
-            {
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireLength = 0;
-                options.Password.RequireUniqueChars = 0;
-            });
+            // builder.Services.Configure<IdentityOptions>(options =>
+            // {
+            //     options.Password.RequireDigit = false;
+            //     options.Password.RequireLowercase = false;
+            //     options.Password.RequireNonAlphanumeric = false;
+            //     options.Password.RequireUppercase = false;
+            //     options.Password.RequireLength = 0;
+            //     options.Password.RequireUniqueChars = 0;
+            // });
 
             WebApplication app = builder.Build();
 
