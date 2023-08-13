@@ -21,7 +21,7 @@ _A MVC web application that enables users to store and view information about Pi
 ## Setup/Installation Requirements
 
 * _Clone this repository to your desktop._
-* _Open your shell (e.g., Terminal or GitBash) and navigate to this project's production directory at ```./PierresSweetSavoryTreats.Solution/PierresTreats/```._
+* _Open your shell (e.g., Terminal or GitBash) and navigate to this project's production directory at ```./PierresSweetAndSavoryTreats.Solution/PSST/```._
 
 #### To Configure and Access the Database:
 * _Within the production directory "PierresTreats", create a new file called ```appsettings.json```._
