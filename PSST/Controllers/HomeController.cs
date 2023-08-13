@@ -1,10 +1,10 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using PSST.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using PSST.Models;
+using System.Security.Claims;
 
 namespace PSST.Controllers
 {
@@ -22,21 +22,20 @@ namespace PSST.Controllers
         [HttpGet("/")]
         public async Task<ActionResult> Index()
         {
-            if (User.Identity.IsAuthenticated)
+            Flavor[] flavors = _db.Flavors.ToArray();
+            Dictionary<string, object[]> model = new Dictionary<string, object[]>();
+            model.Add("flavors", flavors);
+            string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+            Treat[] treats = null;
+            if (currentUser != null)
             {
-                Treat[] treats = _db.Treats.ToArray();
-                Flavor[] flavors = _db.Flavors.ToArray();
-                Dictionary<string, object[]> model = new Dictionary<string, object[]>();
-                model.Add("treats", treats);
-                model.Add("flavors", flavors);
-                string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
-                return View(model);
+                treats = _db.Treats
+                    // .Where(entry => entry.User.Id == currentUser.Id)
+                    .ToArray();
             }
-            else
-            {
-                return View(_db.Treats.ToList());
-            }
+            model.Add("treats", treats ?? new Treat[0]);
+            return View(model);
         }
     }
 }
