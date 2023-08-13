@@ -2,58 +2,42 @@
   Layout = "_Layout";
 }
 
-@using PSST.Models
+@using PSST.Models;
 
-<h1 class="title">
-  Welcome to an incredibly tasty nightmare!
-</h1>
+<h1>Welcome to an Incredibly Tasty Nightmare!</h1>
+
 <hr>
 
-<h1>Treats</h1>
-<hr>
-<div class="container"> 
+<h4>FLAVORS?</h4>
+@if (Model["flavors"].Length == 0)
+{
+  <p>WHAT HAVE YOU DONE TO MY FLAVOR!?!</p>
+} 
+<ul>
+  @foreach (Flavor flavor in Model["flavors"])
+  {
+    <li>@Html.ActionLink(@flavor.FlavorDescription, "Details", "Flavors", new { id = @flavor.FlavorId})</li>
+  }
+</ul>
+
+<h4>TREATS?</h4>
 @if (Model["treats"].Length == 0)
 {
-  <ul>
-    @foreach(Treat treat in Model["treats"])
-    {
-      <li>@Html.ActionLink($"{treat.TreatName}  | {treat.TreatDescription}", "Details", new { id = treat.TreatId })</li>
-    }
-  </ul>
-}
-else
-{
-  <h3>WHY ARE THERE NO TREATS?!?! WHAT HAVE YOU DONE??</h3>
-}
-</div>
-
-<div class="card">
-@if (@Model["flavors"].Length == 0)
-{
-  <h3>INPUT FLAVORS!</h3>
+  <p>WHERE ARE MY TREATS?!?</p>
 } 
-else
+<ul>
+  @foreach (Treat treat in Model["treats"])
+  {
+    <li>@Html.ActionLink(@treat.TreatDescription, "Details", "Treats", new { id = @treat.TreatId})</li>
+  }
+</ul>
+
+<hr>
+@if (User.Identity.IsAuthenticated)
 {
-  <h3>Flavors</h3>
-  <ul>
-    @foreach (Flavor flavor in Model["flavors"])
-    {
-          <li>@Html.ActionLink($"{flavor.FlavorName}", "Details", new { id = flavor.FlavorId })</li>
-    }
-  </ul>
+  <p>@Html.ActionLink("Add a new flavor", "Create", "Flavors")</p>
+  <p>@Html.ActionLink("Add new treat", "Create", "Treats")</p>
+  <p>@Html.ActionLink("View flavors", "Index", "Flavors")</p>
+  <p>@Html.ActionLink("View treats", "Index", "Treats")</p>
 }
-</div>
-</div> 
-<br>
-<div class="row align-items start">
-  <div class="col">
-    <p>@Html.ActionLink("Manage treats", "Index", "Treats", null, new { @class = "btn btn-light" })</p>
-  </div>
-  <div class="col">
-    <p>@Html.ActionLink("Manage flavors", "Index", "Flavors", null, new { @class = "btn btn-light" })</p>
-  </div>
-</div>
-
-<hr><br>
-
-<p>@Html.ActionLink("Manage Account", "Index", "Account", null, new { @class = "btn btn-secondary" })</p>
+<p>Account<br>@Html.ActionLink("Register / Login", "Index", "Account")</p>

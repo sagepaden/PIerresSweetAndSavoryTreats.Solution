@@ -2,20 +2,19 @@
   Layout = "_Layout";
 }
 
-@model PSST.Models.Flavor;
+@model PSST.Models.Flavor
 
-<h2>Add a flavor</h2>
-<hr>
-
-<p>@Html.ValidationMessageFor(model => model.FlavorName, "", new { @class = "text-danger", @style = "font-weight: 600" })</p>
-
-@using (Html.BeginForm())
-{
-  @Html.LabelFor(model => model.FlavorName, "Flavor:")<br>
-  @Html.TextBoxFor(model => model.FlavorName, new { placeholder = "something funny and not normal hahaha get it? its not normal", style="font-style:italic"})<br>
+<h4>Add a new Flavor:</h4>
+<div class="col">
+  <p>@Html.ValidationMessageFor(model => model.FlavorDescription, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+  <hr/ >
+  <p>FLAVOR NAME:</p>
+  @using (Html.BeginForm())
+  {
+    @Html.TextBoxFor(model => model.FlavorDescription, new { @class = "form-control"})
+    <br>
+    <input type="submit" value="Add new Flavor" class="btn btn-primary btn-sm"/>
+  }
   <br>
-  <input type="submit" value="Add new flavor" class="btn btn-light"/>
-}
-<hr><br>
-<p>@Html.ActionLink("Show all flavors", "Index", "Flavors", null, new { @class = "btn btn-light" })</p>
-<p>@Html.ActionLink("Create a new treat", "Create", "Treats", null, new { @class = "btn btn-light" })</p>
+  <p class="btn btn-primary btn-sm">@Html.ActionLink("Show all Flavors", "Index")</p>
+</div>

@@ -200,7 +200,7 @@ namespace PSST.Migrations
                 {
                     FlavorId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    FlavorName = table.Column<string>(type: "longtext", nullable: false)
+                    FlavorDescription = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
@@ -222,8 +222,6 @@ namespace PSST.Migrations
                 {
                     TreatId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    TreatName = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     TreatDescription = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: true)
@@ -241,25 +239,25 @@ namespace PSST.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "TreatFlavors",
+                name: "FlavorTreats",
                 columns: table => new
                 {
-                    TreatFlavorId = table.Column<int>(type: "int", nullable: false)
+                    FlavorTreatId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     TreatId = table.Column<int>(type: "int", nullable: false),
                     FlavorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TreatFlavors", x => x.TreatFlavorId);
+                    table.PrimaryKey("PK_FlavorTreats", x => x.FlavorTreatId);
                     table.ForeignKey(
-                        name: "FK_TreatFlavors_Flavors_FlavorId",
+                        name: "FK_FlavorTreats_Flavors_FlavorId",
                         column: x => x.FlavorId,
                         principalTable: "Flavors",
                         principalColumn: "FlavorId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TreatFlavors_Treats_TreatId",
+                        name: "FK_FlavorTreats_Treats_TreatId",
                         column: x => x.TreatId,
                         principalTable: "Treats",
                         principalColumn: "TreatId",
@@ -310,13 +308,13 @@ namespace PSST.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TreatFlavors_FlavorId",
-                table: "TreatFlavors",
+                name: "IX_FlavorTreats_FlavorId",
+                table: "FlavorTreats",
                 column: "FlavorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TreatFlavors_TreatId",
-                table: "TreatFlavors",
+                name: "IX_FlavorTreats_TreatId",
+                table: "FlavorTreats",
                 column: "TreatId");
 
             migrationBuilder.CreateIndex(
@@ -343,7 +341,7 @@ namespace PSST.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "TreatFlavors");
+                name: "FlavorTreats");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

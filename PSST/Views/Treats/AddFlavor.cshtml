@@ -1,24 +1,19 @@
 @{
-Layout = "_Layout";
+  Layout = "_Layout";
 }
 
 @model PSST.Models.Treat
 
-<h2>Add Flavor</h2>
+<h4>Add an flavor to this treat: @Html.DisplayFor(model => model.TreatDescription)</h4>
 
 @using (Html.BeginForm())
 {
-@Html.HiddenFor(model => model.TreatId)
+    @Html.HiddenFor(model => model.TreatId)
+    
+    @Html.Label("Select Flavor")
+    @Html.DropDownList("FlavorId")
 
-@Html.Label("Flavor")
-@Html.DropDownList("FlavorId")
-
-<input type="submit", value="Add"/>
+    <input type="submit" value="Save" class="btn btn-primary btn-sm" />
 }
-
-<p>@Html.ActionLink("Back to List", "Index")</p>
-  <br>
-  <br>
-  <p>@Html.ActionLink("Back to List", "Index", "Treats", null, new { @class = "btn btn-light" })</p>
-  <p>@Html.ActionLink("Add a New Flavor", "Create", "Flavors", null, new { @class = "btn btn-light" })</p>
-}
+<br>
+<p>@Html.ActionLink("Back to list", "Index")</p>

@@ -11,8 +11,8 @@ using PSST.Models;
 namespace PSST.Migrations
 {
     [DbContext(typeof(PSSTContext))]
-    [Migration("20230812060111_AddTreatEntity")]
-    partial class AddTreatEntity
+    [Migration("20230813062404_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -219,7 +219,7 @@ namespace PSST.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("FlavorName")
+                    b.Property<string>("FlavorDescription")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -233,6 +233,27 @@ namespace PSST.Migrations
                     b.ToTable("Flavors");
                 });
 
+            modelBuilder.Entity("PSST.Models.FlavorTreat", b =>
+                {
+                    b.Property<int>("FlavorTreatId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("FlavorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TreatId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FlavorTreatId");
+
+                    b.HasIndex("FlavorId");
+
+                    b.HasIndex("TreatId");
+
+                    b.ToTable("FlavorTreats");
+                });
+
             modelBuilder.Entity("PSST.Models.Treat", b =>
                 {
                     b.Property<int>("TreatId")
@@ -240,10 +261,6 @@ namespace PSST.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("TreatDescription")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("TreatName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -255,27 +272,6 @@ namespace PSST.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Treats");
-                });
-
-            modelBuilder.Entity("PSST.Models.TreatFlavor", b =>
-                {
-                    b.Property<int>("TreatFlavorId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("FlavorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TreatId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TreatFlavorId");
-
-                    b.HasIndex("FlavorId");
-
-                    b.HasIndex("TreatId");
-
-                    b.ToTable("TreatFlavors");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -338,16 +334,7 @@ namespace PSST.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("PSST.Models.Treat", b =>
-                {
-                    b.HasOne("PSST.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("PSST.Models.TreatFlavor", b =>
+            modelBuilder.Entity("PSST.Models.FlavorTreat", b =>
                 {
                     b.HasOne("PSST.Models.Flavor", "Flavor")
                         .WithMany("JoinEntities")
@@ -364,6 +351,15 @@ namespace PSST.Migrations
                     b.Navigation("Flavor");
 
                     b.Navigation("Treat");
+                });
+
+            modelBuilder.Entity("PSST.Models.Treat", b =>
+                {
+                    b.HasOne("PSST.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("PSST.Models.Flavor", b =>

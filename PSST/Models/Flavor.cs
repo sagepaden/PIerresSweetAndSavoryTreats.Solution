@@ -3,13 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PSST.Models
 {
-    public class Flavor
-    {
-        public int FlavorId { get; set; }
-
-        [Required(ErrorMessage = "The Flavor must be named!")]
-        public string FlavorName { get; set; }
-        public List<TreatFlavor> JoinEntities { get; set; }
-        public ApplicationUser User { get; set; }
-    }
+  public class Flavor
+  {
+    public int FlavorId { get; set; }
+    [Required(ErrorMessage = "THE FLAVOR MUST BE NAMED!!!")]
+    public string FlavorDescription { get; set; }
+    public List<FlavorTreat> JoinEntities { get; }
+    public ApplicationUser User { get; set; }
+  }
 }
